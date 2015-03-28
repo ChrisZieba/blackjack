@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Blackjack</title>
+    <meta name="description" content="Blackjack">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="blackjack.min.js"></script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			// Set the names for the dealer an player
+			var player = "Player";
+			var dealer = "Dealer";
+			var options = {
+				numberOfDecks: 1
+			};
+
+			$("#deal").click(function() {
+				var game = new Blackjack.Game(player, dealer, options);
+				game.deal();
+
+				var shoe = game.getShoe();
+				var dealerCards = game.getDealer().getCards();
+				var playerCards = game.getPlayer().getCards();			
+				
+				var standStats = Blackjack.Probability.stand(shoe, dealerCards, playerCards, 3);
+				var hitStats = Blackjack.Probability.hit(shoe, dealerCards, playerCards, hitMaxPullCount);
+				var doubleStats = Blackjack.Probability.double(shoe, dealerCards, playerCards, 3);
+
+			});
+		});
+
+	</script>
+</body>
+</html>
