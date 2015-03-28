@@ -80,6 +80,11 @@ Blackjack.Game = (function() {
         };
 
         Player.prototype.canSplit = function() {
+            // The dealer can not split their cards
+            if (this.prototype instanceof Player) {
+                return false;
+            }
+
             var cards = this.cards;
             if (cards.length === 2 && cards[0].rank === cards[1].rank) {
                 return true;
@@ -90,7 +95,7 @@ Blackjack.Game = (function() {
 
         Player.prototype.canDouble = function() {
             // The dealer can not double down
-            if (this.dealer) {
+            if (this.prototype instanceof Player) {
                 return false;
             }
 
