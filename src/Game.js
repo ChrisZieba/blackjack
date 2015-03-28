@@ -1,10 +1,10 @@
 /**
- * A utility library for all related blackjack functions.
+ * A simple blackjack game engine.
  *
  * This source code is licensed under the MIT-style license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * Author: Chris Zieba <zieba.chris@gmail.com>
+ * Author: Chris Zieba (zieba.chris@gmail.com)
  */
 
 'use strict';
@@ -21,7 +21,7 @@ Blackjack.Game = (function() {
     var SPLIT = 'Split';
     var DOUBLE = 'Double';
     var SURRENDER = 'Surrender';
-    
+
     /**
      * Shuffle an array of cards.
      *
