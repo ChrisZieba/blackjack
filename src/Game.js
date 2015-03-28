@@ -79,7 +79,31 @@ Blackjack.Game = (function() {
         this.turn = player;
     }
 
+    Game.prototype.getShoe = function(player) {
+       return this.shoe;
+    }
+
+
+    Game.prototype.getPlayer = function() {
+       return this.player;
+    }
+
+    Game.prototype.getDealer = function() {
+       return this.dealer;
+    }
+
     Game.prototype.deal = function() {
+        load.call(this);
+        // Shuffle the shoe
+        shuffle.call(this);
+
+        // Deal to the player first and then the dealer
+        this.player.cards.push(this.shoe.pop());
+        this.dealer.cards.push(this.shoe.pop());
+        this.player.cards.push(this.shoe.pop());
+
+        // The player will be the first to act
+        this.turn = this.player;
     };
 
     return Game;
