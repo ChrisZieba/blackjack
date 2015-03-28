@@ -67,6 +67,9 @@ Blackjack.Game = (function() {
         this.hitSoft17 = options.hitSoft17;
     };
 
+    /**
+     * Player model.
+     */
     var Player = (function() {
         function Player(name) {
             this.name = name;
