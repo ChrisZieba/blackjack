@@ -16,8 +16,46 @@ Blackjack.Game = (function() {
     var SUITS = ['♥', '♦', '♠', '♣'];
     var RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-    
-    // constructor
+    /**
+     * Shuffle an array of cards.
+     *
+     */
+    var shuffle = function() {
+        var i = this.shoe.length, j, swap;
+
+        while (--i) {
+            j = Math.random() * (i + 1) | 0;
+            swap = this.shoe[i];
+            this.shoe[i] = this.shoe[j];
+            this.shoe[j] = swap;
+        }
+    };
+
+    /**
+     * Shuffle an array of cards.
+     *
+     */
+    var load = function() {
+        // Empty out the shoe (just to be sure)
+        this.shoe = [];
+
+        // Create the shoe using the decks setting
+        for (var i = 0; i < this.decks; i+=1) {
+            for (var j = 0; j < SUITS.length; j++) {
+                for (var k = 0; k < RANKS.length; k++) {
+                    this.shoe.push(new Card(RANKS[k], SUITS[j]));
+                }
+            }
+        }
+    };
+
+    /**
+     * Game Constructor.
+     *
+     * @param {String} player
+     * @param {String} dealer
+     * @param {Object} options
+     */
     function Game(player, dealer, options) {
         this.decks = options.numberOfDecks;
         this.hitSoft17 = options.hitSoft17;
@@ -53,7 +91,7 @@ Blackjack.Game = (function() {
      * Represents the dealer (house) in the game. A dealer
      * is a subclass of the Player class.
      *
-     * @param {String} $name
+     * @param {String} name
      */
     function Dealer(name) {
         Player.call(this, name);
@@ -73,20 +111,6 @@ Blackjack.Game = (function() {
         this.suit = suit;
     }
 
-    /**
-     * Shuffle an array of cards.
-     *
-     */
-    var shuffle = function() {
-        var i = this.shoe.length, j, swap;
-
-        while (--i) {
-            j = Math.random() * (i + 1) | 0;
-            swap = this.shoe[i];
-            this.shoe[i] = this.shoe[j];
-            this.shoe[j] = swap;
-        }
-    };
 
     Game.prototype.getTurn = function() {
         return this.turn;
