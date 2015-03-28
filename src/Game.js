@@ -102,6 +102,26 @@ Blackjack.Game = (function() {
             return false;
         };
 
+        Player.prototype.getActions = function() {
+            var total = Blackjack.Utils.score(this.cards);
+            this.actions = [];
+
+            if (total < 21) {
+                this.actions.push(HIT);
+                this.actions.push(STAND);
+            }
+
+            if (this.canDouble.call(this)) {
+                this.actions.push(DOUBLE);
+            }
+
+            if (this.canSplit.call(this)) {
+                this.actions.push(SPLIT);
+            }
+
+            return this.actions;
+        };
+
         return Player;
     }());
 
