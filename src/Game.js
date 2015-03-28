@@ -56,6 +56,21 @@ Blackjack.Game = (function() {
         this.suit = suit;
     }
 
+    /**
+     * Shuffle an array of cards.
+     *
+     */
+    var shuffle = function() {
+        var i = this.shoe.length, j, swap;
+
+        while (--i) {
+            j = Math.random() * (i + 1) | 0;
+            swap = this.shoe[i];
+            this.shoe[i] = this.shoe[j];
+            this.shoe[j] = swap;
+        }
+    };
+
     Game.prototype.getTurn = function() {
         return this.turn;
     }
