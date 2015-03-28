@@ -11,7 +11,7 @@
 
 var Blackjack = Blackjack || {};
 
-Blackjack.Game = (function () {
+Blackjack.Game = (function() {
 
     var SUITS = ['♥', '♦', '♠', '♣'];
     var RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -24,7 +24,29 @@ Blackjack.Game = (function () {
     };
 
     var Player = (function() {
+        function Player(name) {
+            this.name = name;
+            this.cards = [];
+            this.actions = [];
+        }
 
+        Player.prototype.getCards = function() {
+            return this.cards;
+        };
+
+        Player.prototype.canSplit = function() {
+
+        };
+
+        Player.prototype.canDouble = function() {
+
+        };
+
+        Player.prototype.getActions = function() {
+
+        };
+
+        return Player;
     }());
 
     Dealer.prototype = Object.create(Player.prototype);
