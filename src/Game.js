@@ -49,8 +49,25 @@ Blackjack.Game = (function() {
         return Player;
     }());
 
+    /**
+     * Represents the dealer (house) in the game. A dealer
+     * is a subclass of the Player class.
+     *
+     * @param {String} $name
+     */
+    function Dealer(name) {
+        Player.call(this, name);
+    }
+
+    // Attach the Player object to the Dealer prototype for subclass
     Dealer.prototype = Object.create(Player.prototype);
 
+    /**
+     * Represents a card in the shoe.
+     *
+     * @param {String} rank 
+     * @param {String} suit
+     */
     function Card(rank, suit) {
         this.rank = rank;
         this.suit = suit;
