@@ -15,7 +15,13 @@ Blackjack.Game = (function() {
 
     var SUITS = ['♥', '♦', '♠', '♣'];
     var RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
+    var HIT = 'Hit';
+    var BUST = 'Bust';
+    var STAND = 'Stand'
+    var SPLIT = 'Split';
+    var DOUBLE = 'Double';
+    var SURRENDER = 'Surrender';
+    
     /**
      * Shuffle an array of cards.
      *
