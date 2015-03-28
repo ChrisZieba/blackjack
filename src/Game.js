@@ -72,6 +72,7 @@ Blackjack.Game = (function() {
             this.name = name;
             this.cards = [];
             this.actions = [];
+            this.history = [];
         }
 
         Player.prototype.getCards = function() {
@@ -79,15 +80,26 @@ Blackjack.Game = (function() {
         };
 
         Player.prototype.canSplit = function() {
+            var cards = this.cards;
+            if (cards.length === 2 && cards[0].rank === cards[1].rank) {
+                return true;
+            }
 
+            return false;
         };
 
         Player.prototype.canDouble = function() {
+            // The dealer can not double down
+            if (this.dealer) {
+                return false;
+            }
 
-        };
+            // A double down is only allowed on the first play or after a split
+            if (this.history.length === 0 || this.history[this.history.length-1] === SPLIT) {
+                return true;
+            }
 
-        Player.prototype.getActions = function() {
-
+            return false;
         };
 
         return Player;
