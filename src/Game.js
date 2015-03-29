@@ -24,7 +24,6 @@ Blackjack.Game = (function() {
 
     /**
      * Shuffle an array of cards.
-     *
      */
     var shuffle = function() {
         var i = this.shoe.length, j, swap;
@@ -38,8 +37,7 @@ Blackjack.Game = (function() {
     };
 
     /**
-     * Shuffle an array of cards.
-     *
+     * Load the shoe with cards.
      */
     var load = function() {
         // Empty out the shoe (just to be sure)
@@ -78,12 +76,22 @@ Blackjack.Game = (function() {
             this.history = [];
         }
 
+        /**
+         * Returns the players cards.
+         *
+         * @return {Array} cards
+         */
         Player.prototype.getCards = function() {
             return this.cards;
         };
 
+        /**
+         * Can a player split their dealt cards.
+         *
+         * @return {Boolean}
+         */
         Player.prototype.canSplit = function() {
-            // The dealer can not split their cards
+            // The dealer can never split their cards
             if (this.prototype instanceof Player) {
                 return false;
             }
@@ -96,8 +104,13 @@ Blackjack.Game = (function() {
             return false;
         };
 
+        /**
+         * Can a player double down their hand.
+         *
+         * @return {Boolean}
+         */
         Player.prototype.canDouble = function() {
-            // The dealer can not double down
+            // The dealer can never double down
             if (this.prototype instanceof Player) {
                 return false;
             }
@@ -110,6 +123,11 @@ Blackjack.Game = (function() {
             return false;
         };
 
+        /**
+         * Get a list of possible actions for the player.
+         *
+         * @return {Array}
+         */
         Player.prototype.getActions = function() {
             var total = Blackjack.Utils.score(this.cards);
             this.actions = [];
@@ -180,7 +198,9 @@ Blackjack.Game = (function() {
     }
 
     Game.prototype.deal = function() {
+        // Add the cards to the deck
         load.call(this);
+
         // Shuffle the shoe
         shuffle.call(this);
 
