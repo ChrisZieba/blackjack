@@ -55,7 +55,7 @@ Blackjack.Probability = (function() {
     }
 
     /**
-     * Calculate the win/losss/push probabilities of the player standing after the deal.
+     * Calculate the win/loss/push probabilities of the player standing after the deal.
      *
      * @param {Array} shoe
      * @param {Object} dealerCards
@@ -130,7 +130,7 @@ Blackjack.Probability = (function() {
     };
 
     /**
-     * Calculate the win/losss/push probabilities of the player hitting their hand.
+     * Calculate the win/loss/push probabilities of the player hitting their hand.
      *
      * @param {Array} shoe
      * @param {Object} dealerCards
@@ -200,31 +200,39 @@ Blackjack.Probability = (function() {
         return stats;
     };
 
+    /**
+     * Calculate the win/loss/push probabilities of the player doubling down.
+     *
+     * @param {Array} shoe
+     * @param {Object} dealerCards
+     * @param {Object} playerCards
+     * @param {Integer} maxPullCount
+     * @param {Integer} pullCount
+     * @param {Integer} startIndex
+     * @return {Object} stats
+     */
     var double = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
         var playerTotalAfterPull, playerCardsAfterPull, newStats;
         var playerTotal = Blackjack.Utils.score(playerCards);
-        var stats = initStats();
+        var stats = init();
 
         for (var i = 0, j=pullCount+startIndex; i < shoe.length-pullCount; i+=1, j+=1) {
-            // The player pulls a card from the shoe
-
             j = (j >= shoe.length) ? 0 : j;
-            // this is just making sure we wrap around the array
+            // The player pulls a card from the shoe
             var nextCard = shoe[(pullCount > 0) ? j : i];
 
-
+            // Add the card to the players hand
             playerCardsAfterPull = playerCards.slice();
             playerCardsAfterPull.push(nextCard);
-            //playerTotalAfterPull = Blackjack.Utils.score(playerCardsAfterPull);
 
+            // Calculate what the probabilities are when compared to the dealers hand
             newStats = stand(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount+1, 0);
-            stats = combineStats(stats, newStats);
-
+            stats = combine(stats, newStats);
         }
 
         return stats;
     };
-    
+
     return {
         stand: function(shoe, dealerCards, playerCards, maxPullCount) {
             return stand(shoe, dealerCards, playerCards, maxPullCount, 0, 0);
