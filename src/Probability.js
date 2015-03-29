@@ -1,4 +1,22 @@
+/**
+ * Calulcate blackjack hand probabilities for different actions.
+ *
+ * This source code is licensed under the MIT-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * Author: Chris Zieba (zieba.chris@gmail.com)
+ */
+
+'use strict';
+
+var Blackjack = Blackjack || {};
+
 Blackjack.Probability = (function() {
+    /**
+     * Helper function to initiliaze the probabilities object.
+     *
+     * @return {Object} stats
+     */
     function init() {
         var stats = {
             hands: 0,
@@ -19,6 +37,11 @@ Blackjack.Probability = (function() {
         return stats;
     }
 
+    /**
+     * Helper function to combine probabilities.
+     *
+     * @return {Object} currentStats
+     */
     function combine(currentStats, newStats) {
         currentStats.hands += newStats.hands;
         currentStats.win.hands += newStats.win.hands;
@@ -31,14 +54,35 @@ Blackjack.Probability = (function() {
         return currentStats;
     }
 
+    /**
+     * Calculate the win/losss/push probabilities of the player standing after the deal.
+     *
+     * @param {Array} shoe
+     * @param {Object} dealerCards
+     * @param {Object} playerCards
+     * @param {Integer} maxPullCount
+     * @param {Integer} pullCount
+     * @param {Integer} startIndex
+     * @return {Object} stats
+     */
     var stand = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
         var dealerTotalAfterPull, dealerCardsAfterPull, newStats;
         var playerTotal = Blackjack.Utils.score(playerCards);
-        var stats = init();
+        var stats = initStats();
+
+        //var index = (startIndex !== null) ? startIndex : 0;
 
         for (var i = 0, j=pullCount+startIndex; i < shoe.length-pullCount; i+=1, j+=1) {
+            // The dealer pulls a card from the shoe
+
             j = (j >= shoe.length) ? 0 : j;
+            // this is just making sure we wrap around the array
             var nextCard = shoe[(pullCount > 0) ? j : i];
+
+            /**
+             * Calculate the probability of pulling a card from the deck.
+             * The probability for pulling one card from the shoe is 1/(cards in shoe).
+            */
             var cardProbabilty = 1;
             for (var l=0; l<=pullCount; l+=1) {
                 cardProbabilty *= 1/(shoe.length-l)
@@ -46,6 +90,8 @@ Blackjack.Probability = (function() {
 
             dealerCardsAfterPull = dealerCards.slice();
             dealerCardsAfterPull.push(nextCard);
+            
+            // We want to create a new array so we can use the previos cards easily
             dealerTotalAfterPull = Blackjack.Utils.score(dealerCardsAfterPull);
 
             if (playerTotal > 21) {
@@ -70,9 +116,12 @@ Blackjack.Probability = (function() {
                     stats.push.odds += cardProbabilty;
                 }
             } else {
+                // The reason for passing null in if the pullCount is gratr than 0 is
+                // because we want to start at a specific element in the shoe once for each
+                // main out loop
                 if (pullCount <= maxPullCount) {
                     newStats = stand(shoe, dealerCardsAfterPull, playerCards, maxPullCount, pullCount+1, (pullCount > 0) ? startIndex : i);
-                    stats = combine(stats, newStats);
+                    stats = combineStats(stats, newStats);
                 }
             }
         }
