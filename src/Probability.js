@@ -121,6 +121,10 @@ Blackjack.Probability = (function() {
     return {
         stand: function(shoe, dealerCards, playerCards, maxPullCount) {
             return stand(shoe, dealerCards, playerCards, maxPullCount, 0, 0);
+        },
+
+        double: function(shoe, dealerCards, playerCards, maxPullCount) {
+            return double(shoe, dealerCards, playerCards, maxPullCount, 0, 0);
         }
     };
 }());
