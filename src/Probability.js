@@ -200,6 +200,31 @@ Blackjack.Probability = (function() {
         return stats;
     };
 
+    var double = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
+        var playerTotalAfterPull, playerCardsAfterPull, newStats;
+        var playerTotal = Blackjack.Utils.score(playerCards);
+        var stats = initStats();
+
+        for (var i = 0, j=pullCount+startIndex; i < shoe.length-pullCount; i+=1, j+=1) {
+            // The player pulls a card from the shoe
+
+            j = (j >= shoe.length) ? 0 : j;
+            // this is just making sure we wrap around the array
+            var nextCard = shoe[(pullCount > 0) ? j : i];
+
+
+            playerCardsAfterPull = playerCards.slice();
+            playerCardsAfterPull.push(nextCard);
+            //playerTotalAfterPull = Blackjack.Utils.score(playerCardsAfterPull);
+
+            newStats = stand(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount+1, 0);
+            stats = combineStats(stats, newStats);
+
+        }
+
+        return stats;
+    };
+    
     return {
         stand: function(shoe, dealerCards, playerCards, maxPullCount) {
             return stand(shoe, dealerCards, playerCards, maxPullCount, 0, 0);
