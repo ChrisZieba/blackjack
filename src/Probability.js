@@ -81,6 +81,43 @@ Blackjack.Probability = (function() {
     };
 
 
+    var hit = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
+        var playerTotalAfterPull, playerCardsAfterPull, newStats;
+        var playerTotal = Blackjack.Utils.score(playerCards);
+        var stats = initStats();
+
+        for (var i = 0, j=pullCount+startIndex; i < shoe.length-pullCount; i+=1, j+=1) {
+            j = (j >= shoe.length) ? 0 : j;
+            var nextCard = shoe[(pullCount > 0) ? j : i];
+
+            var cardProbabilty = 1;
+            for (var l=0; l<=pullCount; l+=1) {
+                cardProbabilty*= 1/(shoe.length-l)
+            }
+
+            playerCardsAfterPull = playerCards.slice();
+            playerCardsAfterPull.push(nextCard);
+
+            if (pullCount == 0 && playerTotal == 21) {
+                playerTotalAfterPull = playerTotal;
+            } else {
+                playerTotalAfterPull = Blackjack.Utils.score(playerCardsAfterPull);
+            }
+
+            if (playerTotalAfterPull >= 17) {
+                newStats = stand(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount+1, 0);
+                stats = combineStats(stats, newStats);
+            } else {
+                if (pullCount <= maxPullCount) {
+                    newStats = hit(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount+1, (pullCount > 0) ? startIndex : i);
+                    stats = combineStats(stats, newStats);
+                }
+            }
+        }
+
+        return stats;
+    };
+
     return {
         stand: function(shoe, dealerCards, playerCards, maxPullCount) {
             return stand(shoe, dealerCards, playerCards, maxPullCount, 0, 0);
