@@ -1,5 +1,5 @@
 Blackjack.Probability = (function() {
-    function initStats() {
+    function init() {
         var stats = {
             hands: 0,
             win: {
@@ -19,7 +19,7 @@ Blackjack.Probability = (function() {
         return stats;
     }
 
-    function combineStats(currentStats, newStats) {
+    function combine(currentStats, newStats) {
         currentStats.hands += newStats.hands;
         currentStats.win.hands += newStats.win.hands;
         currentStats.win.odds += newStats.win.odds;
@@ -34,7 +34,7 @@ Blackjack.Probability = (function() {
     var stand = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
         var dealerTotalAfterPull, dealerCardsAfterPull, newStats;
         var playerTotal = Blackjack.Utils.score(playerCards);
-        var stats = initStats();
+        var stats = init();
 
         for (var i = 0, j=pullCount+startIndex; i < shoe.length-pullCount; i+=1, j+=1) {
             j = (j >= shoe.length) ? 0 : j;
@@ -72,7 +72,7 @@ Blackjack.Probability = (function() {
             } else {
                 if (pullCount <= maxPullCount) {
                     newStats = stand(shoe, dealerCardsAfterPull, playerCards, maxPullCount, pullCount+1, (pullCount > 0) ? startIndex : i);
-                    stats = combineStats(stats, newStats);
+                    stats = combine(stats, newStats);
                 }
             }
         }
@@ -94,7 +94,7 @@ Blackjack.Probability = (function() {
     var hit = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
         var playerTotalAfterPull, playerCardsAfterPull, newStats;
         var playerTotal = Blackjack.Utils.score(playerCards);
-        var stats = initStats();
+        var stats = init();
 
         /**
          * Loop through every card in the shoe.
@@ -134,7 +134,7 @@ Blackjack.Probability = (function() {
                  * we need to calculate the probabilites as if the hand was played out by the dealer.
                  */
                 newStats = stand(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount + 1, 0);
-                stats = combineStats(stats, newStats);
+                stats = combine(stats, newStats);
             } else {
                 /**
                  * If the player hand is not withing the standing range we hit again.
@@ -143,7 +143,7 @@ Blackjack.Probability = (function() {
                  */
                 if (pullCount <= maxPullCount) {
                     newStats = hit(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount + 1, (pullCount > 0) ? startIndex : i);
-                    stats = combineStats(stats, newStats);
+                    stats = combine(stats, newStats);
                 }
             }
         }
