@@ -1,19 +1,17 @@
 #blackjack
 
-A small game engine for casino blackjack and a library for calculating hand probabilities.
+> A small game engine for blackjack and a library for calculating hand probabilities.
 
-#Usage
+The game engine is still very basic and needs a lot of functionality added. Its use is to create the needed scenarios for calculating hand probabilities. To see an example of hand probabilities being caluclated please see [here](http://chriszieba.com/2015/03/30/blackjack_probabilities). There is also an [example](https://github.com/ChrisZieba/blackjack/blob/master/examples/blackjack.html) source file that can be found in the `examples` directory.
 
-You can use the game engine and probability library seperator or together.
+##Usage
+
+You can use the game engine and probability library separately or together.
 
 ```js
-var player = "Player";
-var dealer = "Dealer";
-var options = {
+var game = new Blackjack.Game("player1", "house, {
 	numberOfDecks: 1
-};
-
-var game = new Blackjack.Game(player, dealer, options);
+});
 
 // Start a new game
 game.deal();
@@ -30,16 +28,35 @@ var double = Blackjack.Probability.double(shoe, dealerCards, playerCards, 3);
 
 ##Options
 
-- `numberOfDecks` {Integer} The number of decks in a shoe. The standard in most casinos is between 4 and 8.
+- `numberOfDecks` {Integer} 
+   - The number of decks in a shoe. The standard in most casinos is between 4 and 8.
+- `dealerHitSoft17` {Boolean} 
+    - If `true` the dealer will hit on soft 17, otherwise the dealer will continue to draw cards.
 
-##TODO
+##Development
+
+There are many features for the game engine that need to be added and/or  worked on:
 
 - Add splitting to the probability library
-- Handle player and dealer amounts
-- More than one player to a game
+- Handle player and dealer chip amounts
+- Support for more than one player to a game
 
-There are many options that I would like to support:
+There are many options that need to be supported in the game constructor:
 
-- `dealerHitSoft17`
-- `resplitAces`
-- `player5Card21`
+- `playerResplitAces`
+- `player5Card21` 
+- `playerSurrender`
+
+###Local
+
+To build `blackjack` please run:
+
+```
+grunt
+```
+
+The combined minified file will appear in the `dist` folder.
+
+##License
+
+`blackjack` is [MIT](https://github.com/ChrisZieba/blackjack/blob/master/LICENSE) licensed.
