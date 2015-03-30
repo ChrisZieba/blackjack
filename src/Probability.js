@@ -68,7 +68,7 @@ Blackjack.Probability = (function() {
     var stand = function(shoe, dealerCards, playerCards, maxPullCount, pullCount, startIndex) {
         var dealerTotalAfterPull, dealerCardsAfterPull, newStats;
         var playerTotal = Blackjack.Utils.score(playerCards);
-        var stats = initStats();
+        var stats = init();
 
         //var index = (startIndex !== null) ? startIndex : 0;
 
@@ -116,12 +116,15 @@ Blackjack.Probability = (function() {
                     stats.push.odds += cardProbabilty;
                 }
             } else {
-                // The reason for passing null in if the pullCount is gratr than 0 is
-                // because we want to start at a specific element in the shoe once for each
-                // main out loop
+                /**
+                 * If the player hand is not withing the standing range we hit again.
+                 * The startIndex is important because we want to pull a card at a 
+                 * specific element in the shoe (the next card). The maxPullCount is 
+                 * used as a way to maintain 
+                 */
                 if (pullCount <= maxPullCount) {
                     newStats = stand(shoe, dealerCardsAfterPull, playerCards, maxPullCount, pullCount+1, (pullCount > 0) ? startIndex : i);
-                    stats = combineStats(stats, newStats);
+                    stats = combine(stats, newStats);
                 }
             }
         }
@@ -186,7 +189,7 @@ Blackjack.Probability = (function() {
                 stats = combine(stats, newStats);
             } else {
                 /**
-                 * If the player hand is not withing the standing range we hit again.
+                 * If the player hand is not within the standing range we hit again.
                  * The startIndex is important because we want to pull a card at a 
                  * specific element in the shoe (the next card).
                  */
