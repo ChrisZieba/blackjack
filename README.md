@@ -37,7 +37,7 @@ var double = Blackjack.Probability.double(shoe, dealerCards, playerCards, 3);
 
 The following are all the public methods exposed through the `Game`, `Player`, and `Probability` API.
 
-###Game
+####Game
 
 - `getDealer()` 
   - Returns the dealer object.
@@ -52,7 +52,7 @@ The following are all the public methods exposed through the `Game`, `Player`, a
 - `deal()`
   - Handles the game setup, i.e., card shuffling, turn setting, etc.
   
-###Player
+####Player
 
 - `getCards()` 
   - Returns an array of the players cards.
@@ -63,7 +63,7 @@ The following are all the public methods exposed through the `Game`, `Player`, a
 - `getActions()` 
   - Returns an array of all the actions available to the player.
 
-###Probabilities
+####Probabilities
 
 The `dealerCards` and `playerCards` can be retrieved using `game.getPlayer().getCards()`. The `maxPullCount` is used to limit the number of times the recursive function is called. A number between `3` and `5` will return a reasonably accurate result while still being fast.
 
