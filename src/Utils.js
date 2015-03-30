@@ -7,11 +7,10 @@
  * Author: Chris Zieba <zieba.chris@gmail.com>
  */
 
-'use strict';
-
 var Blackjack = Blackjack || {};
 
 Blackjack.Utils = {
+
     /**
      * Calculates the score total of a blackjack hand.
      * An ace is treated as 11 until the score is above 
@@ -34,7 +33,7 @@ Blackjack.Utils = {
                 value = 1;
                 ace = true;
             } else {
-                value = parseInt(cards[i].rank);
+                value = parseInt(cards[i].rank, 10);
             }
 
             sum += value;
@@ -47,4 +46,4 @@ Blackjack.Utils = {
 
         return sum; 
     }
-}
+};

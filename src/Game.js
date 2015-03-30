@@ -7,16 +7,16 @@
  * Author: Chris Zieba (zieba.chris@gmail.com)
  */
 
-'use strict';
-
 var Blackjack = Blackjack || {};
 
 Blackjack.Game = (function() {
+    'use strict';
+
     var SUITS = ['♥', '♦', '♠', '♣'];
     var RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     var HIT = 'Hit';
     var BUST = 'Bust';
-    var STAND = 'Stand'
+    var STAND = 'Stand';
     var SPLIT = 'Split';
     var DOUBLE = 'Double';
     var SURRENDER = 'Surrender';
@@ -73,7 +73,7 @@ Blackjack.Game = (function() {
         
         this.shoe = [];
         this.turn = null;
-    };
+    }
 
     /**
      * Player model.
@@ -188,24 +188,23 @@ Blackjack.Game = (function() {
 
     Game.prototype.getTurn = function() {
         return this.turn;
-    }
+    };
 
     Game.prototype.setTurn = function(player) {
         this.turn = player;
-    }
+    };
 
     Game.prototype.getShoe = function(player) {
        return this.shoe;
-    }
-
+    };
 
     Game.prototype.getPlayer = function() {
        return this.player;
-    }
+    };
 
     Game.prototype.getDealer = function() {
        return this.dealer;
-    }
+    };
 
     Game.prototype.deal = function() {
         // Add the cards to the deck

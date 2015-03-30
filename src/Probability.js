@@ -7,11 +7,11 @@
  * Author: Chris Zieba (zieba.chris@gmail.com)
  */
 
-'use strict';
-
 var Blackjack = Blackjack || {};
 
 Blackjack.Probability = (function() {
+    'use strict';
+
     /**
      * Helper function to initiliaze the probabilities object.
      *
@@ -85,7 +85,7 @@ Blackjack.Probability = (function() {
             */
             var cardProbabilty = 1;
             for (var l=0; l<=pullCount; l+=1) {
-                cardProbabilty *= 1/(shoe.length-l)
+                cardProbabilty *= 1/(shoe.length-l);
             }
 
             dealerCardsAfterPull = dealerCards.slice();
@@ -96,23 +96,23 @@ Blackjack.Probability = (function() {
 
             if (playerTotal > 21) {
                 stats.hands += 1;
-                stats.lose.hands += 1
+                stats.lose.hands += 1;
                 stats.lose.odds += cardProbabilty;
             } else if (dealerTotalAfterPull > 21) {
                 stats.hands+=1;
-                stats.win.hands += 1
+                stats.win.hands += 1;
                 stats.win.odds += cardProbabilty;
             } else if (dealerTotalAfterPull >= 17) {
                 stats.hands += 1;
                 // the odds are 0% on a push so it is ignored
                 if (dealerTotalAfterPull < playerTotal) {
-                    stats.win.hands += 1
+                    stats.win.hands += 1;
                     stats.win.odds+=cardProbabilty;
                 } else if (dealerTotalAfterPull > playerTotal) {
-                    stats.lose.hands += 1
+                    stats.lose.hands += 1;
                     stats.lose.odds += cardProbabilty;
                 } else {
-                    stats.push.hands += 1
+                    stats.push.hands += 1;
                     stats.push.odds += cardProbabilty;
                 }
             } else {
@@ -166,14 +166,14 @@ Blackjack.Probability = (function() {
              */
             var cardProbabilty = 1;
             for (var l=0; l<=pullCount; l+=1) {
-                cardProbabilty*= 1/(shoe.length-l)
+                cardProbabilty*= 1/(shoe.length-l);
             }
 
             playerCardsAfterPull = playerCards.slice();
             playerCardsAfterPull.push(nextCard);
             
             // Only take a card if not a blackjack
-            if (pullCount == 0 && playerTotal == 21) {
+            if (pullCount === 0 && playerTotal === 21) {
                 playerTotalAfterPull = playerTotal;
             } else {
                 playerTotalAfterPull = Blackjack.Utils.score(playerCardsAfterPull);
