@@ -85,7 +85,7 @@ There are many options that need to be supported in the game constructor:
 - `player5Card21` 
 - `playerSurrender`
 
-###Local
+####Local
 
 To build `blackjack` please run:
 
