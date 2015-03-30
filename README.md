@@ -9,7 +9,7 @@ The game engine is still very basic and needs a lot of functionality added. Its 
 You can use the game engine and probability library separately or together.
 
 ```js
-var game = new Blackjack.Game("player1", "house, {
+var game = new Blackjack.Game('player1', 'house', {
 	numberOfDecks: 1
 });
 
@@ -33,9 +33,47 @@ var double = Blackjack.Probability.double(shoe, dealerCards, playerCards, 3);
 - `dealerHitSoft17` {Boolean} 
     - If `true` the dealer will hit on soft 17, otherwise the dealer will continue to draw cards.
 
+##Methods
+
+The following are all the public methods exposed through the `Game`, `Player`, and `Probability` API.
+
+###Game
+
+- `getDealer()` 
+  - Returns the dealer object.
+- `getPlayer()`
+  - Returns the player object. *Only one player in a game supported right now.*
+- `getTurn()` 
+  - Returns the player or dealer, depending on which turn is set.
+- `setTurn(player)`
+  - Takes a player object and sets that player or dealer as the active turn.
+- `getShoe()` 
+  - Returns an array of all card objects in the shoe.
+- `deal()`
+  - Handles the game setup, i.e., card shuffling, turn setting, etc.
+  
+###Player
+
+- `getCards()` 
+  - Returns an array of the players cards.
+- `canSplit()`
+  - True if the player can split their cards, false otherwise.
+- `canDouble()` 
+  - True if the player can double down, false otherwise.
+- `getActions()` 
+  - Returns an array of all the actions available to the player.
+
+###Probabilities
+
+The `dealerCards` and `playerCards` can be retrieved using `game.getPlayer().getCards()`. The `maxPullCount` is used to limit the number of times the recursive function is called. A number between `3` and `5` will return a reasonably accurate result while still being fast.
+
+- `stand(shoe, dealerCards, playerCards, maxPullCount)` 
+- `hit(shoe, dealerCards, playerCards, maxPullCount)`
+- `double(shoe, dealerCards, playerCards, maxPullCount)` 
+
 ##Development
 
-There are many features for the game engine that need to be added and/or  worked on:
+There are many features for the game engine that need to be added and/or worked on:
 
 - Add splitting to the probability library
 - Handle player and dealer chip amounts
