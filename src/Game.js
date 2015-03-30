@@ -12,7 +12,6 @@
 var Blackjack = Blackjack || {};
 
 Blackjack.Game = (function() {
-
     var SUITS = ['♥', '♦', '♠', '♣'];
     var RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     var HIT = 'Hit';
@@ -62,7 +61,18 @@ Blackjack.Game = (function() {
      */
     function Game(player, dealer, options) {
         this.decks = options.numberOfDecks;
-        this.hitSoft17 = options.hitSoft17;
+        this.dealerHitSoft17 = options.dealerHitSoft17;
+
+        // Set the dealer
+        var DEALER = dealer;
+        this.dealer = new Dealer(DEALER);
+
+        // Only one player for now
+        var PLAYER = player;
+        this.player = new Player(PLAYER);
+        
+        this.shoe = [];
+        this.turn = null;
     };
 
     /**
