@@ -117,10 +117,10 @@ Blackjack.Probability = (function() {
                 }
             } else {
                 /**
-                 * If the player hand is not withing the standing range we hit again.
+                 * If the player hand is not within the standing range we hit again.
                  * The startIndex is important because we want to pull a card at a 
                  * specific element in the shoe (the next card). The maxPullCount is 
-                 * used as a way to maintain 
+                 * used as a way to maintain performance and limit function recursion.
                  */
                 if (pullCount <= maxPullCount) {
                     newStats = stand(shoe, dealerCardsAfterPull, playerCards, maxPullCount, pullCount+1, (pullCount > 0) ? startIndex : i);
