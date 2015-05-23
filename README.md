@@ -1,5 +1,7 @@
 #blackjack
 
+[![Build Status](https://travis-ci.org/ChrisZieba/blackjack.svg)](https://travis-ci.org/ChrisZieba/blackjack)
+
 > A small game engine for blackjack and a library for calculating hand probabilities.
 
 The game engine is still very basic and needs a lot of functionality added. Its use is to create the needed scenarios for calculating hand probabilities. To see an example of hand probabilities being calculated please see [here](http://chriszieba.com/2015/03/30/blackjack-probabilities). There is also an [example](https://github.com/ChrisZieba/blackjack/blob/master/examples/blackjack.html) source file that can be found in the `examples` directory.
