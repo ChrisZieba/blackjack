@@ -91,7 +91,7 @@ Blackjack.Probability = (function() {
             dealerCardsAfterPull = dealerCards.slice();
             dealerCardsAfterPull.push(nextCard);
             
-            // We want to create a new array so we can use the previos cards easily
+            // We want to create a new array so we can use the previous cards easily
             dealerTotalAfterPull = Blackjack.Utils.score(dealerCardsAfterPull);
 
             if (playerTotal > 21) {
@@ -179,11 +179,11 @@ Blackjack.Probability = (function() {
                 playerTotalAfterPull = Blackjack.Utils.score(playerCardsAfterPull);
             }
 
-            // Even if the player total is a bust we need run through the hand probabilites agasint the dealer 
+            // Even if the player total is a bust we need run through the hand probabilities against the dealer 
             if (playerTotalAfterPull >= 17) {
                 /**
                  * If the player hand is within standing range (17 and 21) or bust (> 21)
-                 * we need to calculate the probabilites as if the hand was played out by the dealer.
+                 * we need to calculate the probabilities as if the hand was played out by the dealer.
                  */
                 newStats = stand(shoe, dealerCards, playerCardsAfterPull, maxPullCount, pullCount + 1, 0);
                 stats = combine(stats, newStats);
