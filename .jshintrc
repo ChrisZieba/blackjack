@@ -1,0 +1,26 @@
+{
+  "browser": true,
+  "bitwise": true,
+  "curly": true,
+  "expr": true,
+  "immed": true,
+  "maxdepth": 5,
+  "newcap": true,
+  "noarg": true,
+  "quotmark": "single",
+  "undef": true,
+  "unused": "vars",
+  "strict": true,
+  "globals": {
+    "define": true,
+    "alert": true,
+    "module": true,
+    "jQuery": true,
+    "$": true,
+    "AWS": true,
+    "Handlebars": true,
+    "async": true,
+    "marked": true,
+    "hljs": true
+  }
+}
