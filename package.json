@@ -1,6 +1,6 @@
 {
     "name": "blackjack",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A small game engine for casino blackjack and a library for calculating hand probabilities.",
     "author": "Chris Zieba (zieba.chris@gmail.com)",
     "repository": {
