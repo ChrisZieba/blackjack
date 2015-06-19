@@ -99,4 +99,4 @@ The combined minified file will appear in the `dist` folder.
 
 ##License
 
-`blackjack` is [MIT](https://github.com/ChrisZieba/blackjack/blob/master/LICENSE) licensed.
+[MIT](https://github.com/ChrisZieba/blackjack/blob/master/LICENSE) license.
