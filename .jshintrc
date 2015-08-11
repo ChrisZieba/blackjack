@@ -4,7 +4,7 @@
   "curly": true,
   "expr": true,
   "immed": true,
-  "maxdepth": 5,
+  "maxdepth": 6,
   "newcap": true,
   "noarg": true,
   "quotmark": "single",
