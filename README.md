@@ -1,4 +1,4 @@
-#blackjack
+# blackjack
 
 [![Build Status](https://travis-ci.org/ChrisZieba/blackjack.svg)](https://travis-ci.org/ChrisZieba/blackjack)
 
@@ -6,7 +6,7 @@
 
 The game engine is still very basic and needs a lot of functionality added. Its use is to create the needed scenarios for calculating hand probabilities. To see an example of hand probabilities being calculated please see [here](http://chriszieba.com/2015/03/30/blackjack-probabilities). There is also an [example](https://github.com/ChrisZieba/blackjack/blob/master/examples/blackjack.html) source file that can be found in the `examples` directory.
 
-##Usage
+## Usage
 
 You can use the game engine and probability library separately or together.
 
@@ -28,18 +28,18 @@ var hit = Blackjack.Probability.hit(shoe, dealerCards, playerCards, 3);
 var double = Blackjack.Probability.double(shoe, dealerCards, playerCards, 3);
 ```
 
-##Options
+## Options
 
 - `numberOfDecks` {Integer} 
    - The number of decks in a shoe. The standard in most casinos is between 4 and 8.
 - `dealerHitSoft17` {Boolean} 
     - If `true` the dealer will hit on soft 17, otherwise the dealer will continue to draw cards.
 
-##Methods
+## Methods
 
 The following are all the public methods exposed through the `Game`, `Player`, and `Probability` API.
 
-####Game
+#### Game
 
 - `getDealer()` 
   - Returns the dealer object.
@@ -54,7 +54,7 @@ The following are all the public methods exposed through the `Game`, `Player`, a
 - `deal()`
   - Handles the game setup, i.e., card shuffling, turn setting, etc.
   
-####Player
+#### Player
 
 - `getCards()` 
   - Returns an array of the players cards.
@@ -65,7 +65,7 @@ The following are all the public methods exposed through the `Game`, `Player`, a
 - `getActions()` 
   - Returns an array of all the actions available to the player.
 
-####Probabilities
+#### Probabilities
 
 The `dealerCards` and `playerCards` can be retrieved using `game.getPlayer().getCards()`. The `maxPullCount` is used to limit the number of times the recursive function is called. A number between `3` and `5` will return a reasonably accurate result while still being fast.
 
@@ -73,7 +73,7 @@ The `dealerCards` and `playerCards` can be retrieved using `game.getPlayer().get
 - `hit(shoe, dealerCards, playerCards, maxPullCount)`
 - `double(shoe, dealerCards, playerCards, maxPullCount)` 
 
-##Development
+## Development
 
 There are many features for the game engine that need to be added and/or worked on:
 
@@ -87,7 +87,7 @@ There are many options that need to be supported in the game constructor:
 - `player5Card21` 
 - `playerSurrender`
 
-####Local
+#### Local
 
 To build `blackjack` please run:
 
@@ -97,6 +97,6 @@ grunt
 
 The combined minified file will appear in the `dist` folder.
 
-##License
+## License
 
 [MIT](https://github.com/ChrisZieba/blackjack/blob/master/LICENSE) license.
